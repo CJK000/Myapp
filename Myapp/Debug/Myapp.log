@@ -1,0 +1,4 @@
+﻿  number.cpp
+d:\学习\dev-c++\编译\软件工程\myapp\myapp\number.cpp(47): warning C4101: “gcd”: 未引用的局部变量
+d:\学习\dev-c++\编译\软件工程\myapp\myapp\number.cpp(69): warning C4101: “gcd”: 未引用的局部变量
+  Myapp.vcxproj -> D:\学习\dev-c++\编译\软件工程\Myapp\Debug\Myapp.exe
