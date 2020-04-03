@@ -13,12 +13,12 @@ class Point {
 	Number num;
 };
 
-class Make {
+class Epression {
 	public:
 		int n;	//最大数字
 		int problemNum;	//生成题目的个数
 		set<string> stringSet;
-		Make(int n, int problemNum) {
+		Epression(int n, int problemNum) {
 			this->n = n;
 			this->problemNum = problemNum;
 			stringSet.clear();
@@ -30,6 +30,7 @@ class Make {
 		string MakeMul();
 		string MkaeDiv();
 		string MakeThree();
+		bool Insert(string str);
 		bool CheckIn(string str);
 		void RandMake();
 		void OrderMake();

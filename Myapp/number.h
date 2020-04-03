@@ -24,15 +24,27 @@ public:
 		numerator = b;
 		denominator = c;
 	}
+	Number(string str, int i);	//将字符串 str 从第 i 位开始获取一个Number对象
+	Number(string str) {
+		(*this) = Number(str, 0);
+	}
 	string ToString();
 	void ClarifyNu();
+	bool CheckNumber();
 	Number operator+(Number t);
 	Number operator-(Number t);
 	Number operator*(Number t);
 	Number operator/(Number t);
 	bool operator>(Number t);
+	bool operator>=(Number t);
 	bool operator<(Number t);
+	bool operator<=(Number t);
 	bool operator==(Number t);
+	bool operator!=(Number t);
 	void Print();
 
 };
+
+
+
+void CatchInt(string s, int &i, int &a);	//从字符串中读出一个整数

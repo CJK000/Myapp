@@ -3,14 +3,69 @@
 #include<string>
 using namespace std;
 
-void Number::Print() {
+void Number::Print() {	//输出数字
 	printf("%d", this->integer);
 	if (this->denominator) {
 		printf("'%d/%d", this->numerator, this->denominator);
 	}
 }
 
-string Number::ToString() {
+
+bool Number::CheckNumber() {
+	if (this->integer == -1)return false;
+	if (this->numerator == -1)return false;
+	if (this->denominator == -1)return false;
+	return true;
+}
+
+void CatchInt(string s, int &i, int &a) {	//从字符串中读出一个整数
+	a = 0;
+	for (; i < s.length(); i++) {
+		if (s[i] >= '0' && s[i] <= '9') {
+			a = a * 10 + s[i] - '0';
+		}
+		else {
+			return;
+		}
+	}
+}
+
+
+Number::Number(string s, int i) {	//用一个代表数字的字符串初始化数字对象
+	int a=0;
+	if (s[i]<'0' || s[i]>'9') {
+		this->integer = -1;
+		return;
+	}
+	CatchInt(s, i, this->integer);
+	this->denominator = 0;
+	this->numerator = 0;
+	if (i == s.length()) return;
+	if (s[i]!= '\'') {
+		if (s[i] != ' '&&s[i] != '\n') {
+			return;
+		}
+		else {
+			this->numerator = -1;
+			return;
+		}
+	}
+	i++;
+	CatchInt(s, i, this->numerator);
+	if (s[i] != '/') {
+		if (s[i] != ' '&&s[i] != '\n') {
+			return;
+		}
+		else {
+			this->denominator = -1;
+			return;
+		}
+	}
+	i++;
+	CatchInt(s, i, this->denominator);
+}
+
+string Number::ToString() {	//将储字转换成字符串
 	char s[20];
 	string str(itoa(this->integer, s, 10));
 	if (this->denominator != 0) {
@@ -22,7 +77,7 @@ string Number::ToString() {
 	return str;
 }
 
-int Gcd(int x, int y) {
+int Gcd(int x, int y) {	//最大公因数
 	if (y > x) swap(x, y);
 	while (y) {
 		x = x % y;
@@ -31,7 +86,7 @@ int Gcd(int x, int y) {
 	return x;
 }
 
-void Number::ClarifyNu() {
+void Number::ClarifyNu() {	//假分数化成带分数，调用前整数部分为正确数字
 	this->integer += this->numerator / this->denominator;
 	this->numerator %= this->denominator;
 	if (this->numerator == 0) this->denominator = 0;
@@ -126,28 +181,27 @@ Number Number::operator/(Number t) {
 
 bool Number::operator<(Number t) {
 	if (this->integer == t.integer) {
-			return this->numerator*t.denominator < t.numerator*this->denominator;
+		return this->numerator*t.denominator < t.numerator*this->denominator;
 	}
 	return this->integer < t.integer;
 }
 
-
-
-bool Number::operator>(Number t) {
-	if (this->integer == t.integer) {
-		return this->numerator*t.denominator > t.numerator*this->denominator;
-	}
-	return this->integer > t.integer;
+bool Number::operator<=(Number t) {
+	return *this > t == false;
 }
 
+bool Number::operator>(Number t) {
+	return t < *this;
+}
+
+bool Number::operator>=(Number t) {
+	return *this < t == false;
+}
 
 bool Number::operator==(Number t) {
-	if (this->integer == t.integer) {
-		if (this->denominator == t.denominator) {
-			if (this->denominator == 0) return true;
-			else if (this->denominator == 0 || t.denominator==0) return false;
-			else return this->numerator == t.numerator;
-		}
-	}
-	return false;
+	return *this < t == false && t < *this == false;
+}
+
+bool Number::operator!=(Number t) {
+	return (*this == t) == false;
 }
