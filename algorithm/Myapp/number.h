@@ -17,7 +17,7 @@ public:
 	string ToString();	//把当前的Number对象转换成 string ，可用于输出或其他处理
 	void ClarifyNu();	//假分数化成带分数，调用前整数部分为正确数字
 	bool CheckNumber();	//检查当前 Number 对象是否为一个合法的数字，可用于判断其他运算返回的结果是否合法
-	bool CheckNumber(int max_n);	//检查当前 Number 对象是否为一个合法的数字，可用于判断其他运算返回的结果是否合法
+	bool CheckNumber(int max_n, int max_de);	//检查当前 Number 对象是否为一个合法的数字，可用于判断其他运算返回的结果是否合法
 	Number operator+(Number t);
 	Number operator-(Number t);
 	Number operator*(Number t);

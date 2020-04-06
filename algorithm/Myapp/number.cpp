@@ -19,11 +19,10 @@ bool Number::CheckNumber() {
 	return true;
 }
 
-bool Number::CheckNumber(int max_n) {
+bool Number::CheckNumber(int max_n, int max_de) {
 	if (this->CheckNumber() == false)return false;
 	if (this->integer > max_n)return false;
-	if (this->denominator > max_n)return false;
-	if (this->numerator > max_n)return false;
+	if (this->denominator > max_de)return false;
 	return true;
 }
 
@@ -42,7 +41,10 @@ Number::Number(int n) {
 	}
 	denominator = rand() % (n+1);
 	if (denominator == 0) numerator = 0;
-	else numerator = rand() % denominator;
+	else {
+		numerator = rand() % denominator;
+		this->ClarifyNu();
+	}
 	if (this->numerator == 0)this->denominator = 0;
 }
 
@@ -219,7 +221,7 @@ Number Number::operator*(Number t) {
 
 
 Number Number::operator/(Number t) {
-	if (t == Number(0, 0, 0))return t;
+	if (t == Number(0, 0, 0))return Number(-1, -1, -1);
 	if (t.denominator == 0) t.denominator = 1;
 	t.numerator = t.denominator*t.integer + t.numerator;
 	t.integer = 0;

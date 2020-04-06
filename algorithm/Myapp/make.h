@@ -14,7 +14,7 @@ class Make {
 		int problemNum;	//生成题目的个数
 		set<string> stringSet;	//将生成的题目和所有等价的题目插入此，用于查重
 		vector<Expression> exp;
-		typedef vector<Expression>(Make::*Function_ptr)(int, int, int);
+		typedef vector<Expression>(Make::*Function_ptr)(int, int, int, int);
 		const Function_ptr randMake[4] = {&Make::RandPlus, &Make::RandMinus, &Make::RandMul, &Make::RandDiv };
 		Make(int n, int problemNum) {
 			this->max_number = n;
@@ -27,10 +27,10 @@ class Make {
 		//output=1表示本次调用为第一次调用，需要返回输出
 		//返回值中为一个题目和它的等价题目
 		//如果返回的vector为空，则本次生成题目失败
-		vector<Expression> RandPlus(int max_n, int symbol_n, int output);
-		vector<Expression> RandMinus(int max_n, int symbol_n, int output);
-		vector<Expression> RandMul(int max_n, int symbol_n, int output);
-		vector<Expression> RandDiv(int max_n, int symbol_n, int output);
+		vector<Expression> RandPlus(int max_n, int max_de, int symbol_n, int output);
+		vector<Expression> RandMinus(int max_n, int max_de, int symbol_n, int output);
+		vector<Expression> RandMul(int max_n, int max_de, int symbol_n, int output);
+		vector<Expression> RandDiv(int max_n, int max_de, int symbol_n, int output);
 		bool CheckExist(Expression exp);	//检查此题目是否已生成
 		void Insert(Expression exp);	//将一个题目插入到 stringSet中
 };

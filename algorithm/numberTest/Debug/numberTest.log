@@ -1,2 +1,9 @@
-﻿    正在创建库 D:\学习\dev-c++\编译\软件工程\Myapp\Debug\numberTest.lib 和对象 D:\学习\dev-c++\编译\软件工程\Myapp\Debug\numberTest.exp
-  numberTest.vcxproj -> D:\学习\dev-c++\编译\软件工程\Myapp\Debug\numberTest.dll
+﻿  pch.cpp
+  numberTest.cpp
+d:\学习\dev-c++\编译\软件工程\myapp\algorithm\myapp\make.h(23): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+    正在创建库 D:\学习\dev-c++\编译\软件工程\Myapp\algorithm\Debug\numberTest.lib 和对象 D:\学习\dev-c++\编译\软件工程\Myapp\algorithm\Debug\numberTest.exp
+Myapp.obj : error LNK2019: 无法解析的外部符号 "public: class std::vector<class Expression,class std::allocator<class Expression> > __thiscall Make::RandPlus(int,int,int)" (?RandPlus@Make@@QAE?AV?$vector@VExpression@@V?$allocator@VExpression@@@std@@@std@@HHH@Z)，该符号在函数 "public: __thiscall Make::Make(int,int)" (??0Make@@QAE@HH@Z) 中被引用
+Myapp.obj : error LNK2019: 无法解析的外部符号 "public: class std::vector<class Expression,class std::allocator<class Expression> > __thiscall Make::RandMinus(int,int,int)" (?RandMinus@Make@@QAE?AV?$vector@VExpression@@V?$allocator@VExpression@@@std@@@std@@HHH@Z)，该符号在函数 "public: __thiscall Make::Make(int,int)" (??0Make@@QAE@HH@Z) 中被引用
+Myapp.obj : error LNK2019: 无法解析的外部符号 "public: class std::vector<class Expression,class std::allocator<class Expression> > __thiscall Make::RandMul(int,int,int)" (?RandMul@Make@@QAE?AV?$vector@VExpression@@V?$allocator@VExpression@@@std@@@std@@HHH@Z)，该符号在函数 "public: __thiscall Make::Make(int,int)" (??0Make@@QAE@HH@Z) 中被引用
+Myapp.obj : error LNK2019: 无法解析的外部符号 "public: class std::vector<class Expression,class std::allocator<class Expression> > __thiscall Make::RandDiv(int,int,int)" (?RandDiv@Make@@QAE?AV?$vector@VExpression@@V?$allocator@VExpression@@@std@@@std@@HHH@Z)，该符号在函数 "public: __thiscall Make::Make(int,int)" (??0Make@@QAE@HH@Z) 中被引用
+D:\学习\dev-c++\编译\软件工程\Myapp\algorithm\Debug\numberTest.dll : fatal error LNK1120: 4 个无法解析的外部命令

@@ -9,10 +9,18 @@ using namespace std;
 
 int main()
 {
-	Make m(10, 2);
+	Make m(3, 2);
 	vector<Expression> v;
-	v = m.RandPlus(m.max_number,3,1);
-	cout << v[0].ToString() << " = " << v[0].answer.ToString() << endl;
+	for (int i = 0; i < 1000000; i++) {
+		v = m.RandPlus(m.max_number, m.max_number, 3, 1);
+		if (v.size() > 0)cout << v[0].ToString() << " = " << v[0].answer.ToString() << endl;
+		v = m.RandMinus(m.max_number, m.max_number, 3, 1);
+		if (v.size() > 0)cout << v[0].ToString() << " = " << v[0].answer.ToString() << endl;
+		v = m.RandMul(m.max_number, m.max_number, 3, 1);
+		if (v.size() > 0)cout << v[0].ToString() << " = " << v[0].answer.ToString() << endl;
+		v = m.RandDiv(m.max_number, m.max_number, 3, 1);
+		if (v.size() > 0)cout << v[0].ToString() << " = " << v[0].answer.ToString() << endl;
+	}
 	
 }
 
