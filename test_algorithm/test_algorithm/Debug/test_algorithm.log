@@ -1,0 +1,3 @@
+﻿  test.cpp
+C:\Users\24277\source\repos\test_algorithm\test_algorithm\algorithm\make.h(23,14): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+  test_algorithm.vcxproj -> C:\Users\24277\source\repos\test_algorithm\Debug\test_algorithm.exe
