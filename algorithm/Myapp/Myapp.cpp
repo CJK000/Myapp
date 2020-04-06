@@ -9,7 +9,7 @@ using namespace std;
 
 int main()
 {
-	Make m(3, 2);
+	Make m(10000, 2);
 	vector<Expression> v;
 	for (int i = 0; i < 1000000; i++) {
 		v = m.RandPlus(m.max_number, m.max_number, 3, 1);
