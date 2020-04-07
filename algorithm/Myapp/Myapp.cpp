@@ -11,7 +11,7 @@ int main()
 {
 	Make m(100, 2);
 	vector<Expression> v;
-/*
+
 	for (int i = 0; i < 10000; i++) {
 		v = (m.*m.randMake[rand() % 4])(m.max_number, m.max_number, rand() % 3 + 1, 1);
 		if (v.size() > 0) {
@@ -26,8 +26,9 @@ int main()
 			}
 		}
 	}
-*/
 
+
+/*
 	for (int i = 0; i < 10000; i++) {
 		v = m.RandPlus(m.max_number, m.max_number, 1, 1);
 		if (v.size() > 0)cout << v[0].ToString() << " = " << v[0].answer.ToString() << endl;
@@ -38,7 +39,7 @@ int main()
 		v = m.RandDiv(m.max_number, m.max_number, 1, 1);
 		if (v.size() > 0)cout << v[0].ToString() << " = " << v[0].answer.ToString() << endl;
 	}
-
+*/
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
