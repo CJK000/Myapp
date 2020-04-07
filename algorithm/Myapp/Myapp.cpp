@@ -4,15 +4,76 @@
 #include"expression.h"
 #include"make.h"
 #include <iostream>
+#define PROBLEM_NUMBER 100	//需要生成的题目数量
 using namespace std;
 
 
 int main()
 {
-	Make m(10, 2);
-	vector<Expression> v;
 
-	cout << (Number(3, 1, 5) / Number(3, 0, 0)).ToString() << endl;
+//比对答案操作
+/*
+	string problem;	//从题目文件中直接读一行到这里
+	string answer;	//从答案文件中直接读一行到这里
+	Number user_answer(answer);	//将用户的答案转换成 Number 对象
+	Number cal_answer;	//存储程序计算出来的正确答案
+
+	cal_answer = Expression(problem).answer;	
+	//用字符串初始化Expression对象时已完成计算正确答案
+	//将正确答案赋值给 cal_answer
+
+	if (cal_answer.CheckNumber() == false) {	//题目格式有错
+		//做对应处理
+	}
+	else {
+		if (user_answer.CheckNumber() == false) {	//用户答案格式有错
+			//做对应处理
+		}
+		else {
+			if (cal_answer == user_answer) {
+				//答案正确
+				cout << user_answer.ToString();		//将正确答案转化为字符串输出到对应位置
+			}
+			else {
+				//答案错误
+				cout << user_answer.ToString();		//将错误答案转化为字符串输出到对应位置
+			}
+		}
+	}
+*/
+
+//生成题目操作
+/*
+	Make m(10);	//初始化一个 Make 类，参数为最大数字
+	Expression problem;	//用于接收返回的题目
+	int cnt = 0;	//计数器，计算已生成题目的数量
+	while (cnt < PROBLEM_NUMBER) {
+		problem = m.MakeProblem();	//生成一个符合要求的题目
+		if (problem.question.size() > 0) {	//返回值里面有题目，生成题目成功
+			
+			cnt++;	//计数器加一
+			
+			cout << problem.ToString();	//将题目转换成字符串输出
+			cout << problem.answer.ToString() << endl;	//将本题的答案转换成字符串输出
+
+			//将本处的 cout 换成输出到文件或 UI 界面即可
+		}
+		else {
+			//生成题目失败，整数最大值太小，无法生成指定数量题目。
+			break;
+		}
+	}
+*/
+
+
+
+
+
+
+
+
+
+//	cout << (Number(18, 0, 0) / Number(18, 1, 2)).ToString() << endl;
 
 //	if (Number(5, 0, 0).CheckNumber(3, 10) == true) {
 //		cout << "true\n";
@@ -25,12 +86,16 @@ int main()
 
 //	cout << Expression("10 * 3'1/3").answer.ToString();
 
+
 /*
-	for (int i = 0; i < 10000; i++) {
-		v = (m.*m.randMake[rand() % 4])(m.max_number, m.max_number, 1, 1);
+	vector<Expression> v;
+	int cnt = 0;
+	while(1) {
+		v = m.MakeProblem();
 		if (v.size() > 0) {
 			if (Expression(v[0].ToString()).Calculate() == v[0].answer) {
-				cout << "true\n";
+				cnt++;
+				cout << cnt << " " << "true\n";
 			}
 			else {
 				string s = v[0].ToString();

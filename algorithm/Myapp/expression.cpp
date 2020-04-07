@@ -78,6 +78,8 @@ string Expression::ToString() {
 			s += ' ';
 		}
 	}
+	s += '=';
+	s += ' ';
 	return s;
 }
 

@@ -226,8 +226,8 @@ Number Number::operator/(Number t) {
 	if (t.denominator == 0) t.denominator = 1;
 	t.numerator = t.denominator*t.integer + t.numerator;
 	t.integer = 0;
-	t.ClarifyNu();
 	swap(t.denominator, t.numerator);
+	t.ClarifyNu();
 	return this->operator*(t);
 }
 

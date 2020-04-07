@@ -5,6 +5,27 @@
 #include<random>
 
 
+
+Expression Make::MakeProblem(void) {
+	vector<Expression> v;	//接收生成题目的返回值
+	int t = 0;
+	while (v.size() == 0) {
+		if (t == 30) {
+			return Expression();	//生成题目失败，整数最大值太小，无法生成指定数量题目。
+		}
+		v = (this->*this->randMake[rand() % 4])(this->max_number, this->max_number, rand() % 3 + 1, 1);
+	}
+	return v[rand() % v.size()];
+}
+
+
+
+
+
+
+
+
+
 bool Make::CheckExist(Expression exp) {
 	return this->stringSet.find(exp.ToString()) != this->stringSet.end() ;
 }

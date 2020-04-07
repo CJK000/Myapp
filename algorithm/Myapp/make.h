@@ -11,14 +11,12 @@ using namespace std;
 class Make {
 	public:
 		int max_number;	//最大数字
-		int problemNum;	//生成题目的个数
 		set<string> stringSet;	//将生成的题目和所有等价的题目插入此，用于查重
 		typedef vector<Expression>(Make::*Function_ptr)(int, int, int, int);
 		//函数指针数组 randMake[4] 的四个元素为随机生成题目的函数指针，方便随机调用时使用
 		const Function_ptr randMake[4] = {&Make::RandPlus, &Make::RandMinus, &Make::RandMul, &Make::RandDiv };
-		Make(int n, int problemNum) {
+		Make(int n) {
 			this->max_number = n;
-			this->problemNum = problemNum;
 			stringSet.clear();
 			srand(time(0));
 		}
@@ -39,4 +37,6 @@ class Make {
 		vector<Expression> RandMinus(int max_n, int max_de, int symbol_n, int output);
 		vector<Expression> RandMul(int max_n, int max_de, int symbol_n, int output);
 		vector<Expression> RandDiv(int max_n, int max_de, int symbol_n, int output);
+
+		Expression MakeProblem(void);
 };
