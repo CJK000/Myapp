@@ -39,6 +39,7 @@ vector<Expression> Make::RandPlus(int max_n, int max_de, int symbol_n, int outpu
 	}
 	else {
 		vector<Expression> subExpression;
+		if (max_n == 0)return v;
 		while (a == Number(0, 0, 0))a = Number(max_n, max_de);
 		if (a.denominator == 0) subExpression = (this->*randMake[rand() % 4])(a.integer, max_de, symbol_n - 1, 0);
 		else subExpression = (this->*randMake[rand() % 4])(a.integer, max_de / a.denominator, symbol_n - 1, 0);
@@ -124,12 +125,17 @@ vector<Expression> Make::RandMul(int max_n, int max_de, int symbol_n, int output
 	Number a(max_n, max_de);	//生成 b * c = a
 	Number b;
 	Number c;
+	if (max_n == 0) return v;	//输入太小，难以生成题目，直接退出
 	while (a == Number(0, 0, 0))a = Number(max_n, max_de);
 	if (symbol_n == 1) {
+		int t = 0;
 		while (b == Number(0, 0, 0)) {
+			if (t == 3)return v;	//防止死循环
+			t++;
 			if (a.denominator == 0) b = Number(max_n, max_de);
 			else b = Number(max_n, max_de / a.denominator);
 		}
+		if (b == Number(0, 0, 0)) return v;
 		c = a / b;
 		if (c.CheckNumber(max_n, max_de) == true) {
 			v.push_back(Expression(b, '*', c, a));
@@ -149,7 +155,7 @@ vector<Expression> Make::RandMul(int max_n, int max_de, int symbol_n, int output
 				}
 			}
 			else {
-				for (Expression x : v) {
+				for (Expression x : subExpression) {
 					c = a / x.answer;
 					if (c.CheckNumber(max_n, max_de) == true) {
 						x.AddParenthesis();
@@ -177,13 +183,16 @@ vector<Expression> Make::RandMul(int max_n, int max_de, int symbol_n, int output
 //生成 a / b = c
 vector<Expression> Make::RandDiv(int max_n, int max_de, int symbol_n, int output) {
 	vector<Expression> v;
+	if (max_n == 0) return v;
 	Number a(max_n, max_de);
-	while (a == Number(0, 0, 0))a = Number(max_n,this->max_number);
+	while (a == Number(0, 0, 0))a = Number(max_n, max_de);
 	Number b, c;
 	if (symbol_n == 1) {
-		c = a / b;
+		int t = 0;
 		while (b == Number(0, 0, 0) || c.CheckNumber(max_n, max_de) == false) {
-			b = Number(max_n,this->max_number);
+			if (t == 3) return v;	//防止死循环
+			t++;
+			b = Number(max_n, max_de);
 			c = a / b;
 		}
 		v.push_back(Expression(a, '/', b, c));
@@ -201,8 +210,11 @@ vector<Expression> Make::RandDiv(int max_n, int max_de, int symbol_n, int output
 			}
 			if (subExpression.size() > 0) {
 				for (Expression x : subExpression) {
-					x.AddParenthesis();
-					v.push_back(Expression(a, '/', x, a / x.answer));
+					c = a / x.answer;
+					if (c.CheckNumber() == true) {
+						x.AddParenthesis();
+						v.push_back(Expression(a, '/', x, c));
+					}
 				}
 			}
 		}

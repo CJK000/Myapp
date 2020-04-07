@@ -12,9 +12,9 @@ void Number::Print() {	//Êä³öÊı×Ö
 
 
 bool Number::CheckNumber() {
-	if (this->integer == -1)return false;
-	if (this->numerator == -1)return false;
-	if (this->denominator == -1)return false;
+	if (this->integer <= -1)return false;
+	if (this->numerator <= -1)return false;
+	if (this->denominator <= -1)return false;
 	if (this->denominator != 0 && this->numerator >= this->denominator)return false;
 	return true;
 }
@@ -59,6 +59,7 @@ Number::Number(int n, int max_de) {
 	if (denominator == 0) numerator = 0;
 	else numerator = rand() % denominator;
 	if (this->numerator == 0) this->denominator = 0;
+	else this->ClarifyNu();
 }
 
 Number::Number(int a, int b, int c) {
@@ -225,6 +226,7 @@ Number Number::operator/(Number t) {
 	if (t.denominator == 0) t.denominator = 1;
 	t.numerator = t.denominator*t.integer + t.numerator;
 	t.integer = 0;
+	t.ClarifyNu();
 	swap(t.denominator, t.numerator);
 	return this->operator*(t);
 }
@@ -232,7 +234,15 @@ Number Number::operator/(Number t) {
 
 bool Number::operator<(Number t) {
 	if (this->integer == t.integer) {
-		return this->numerator*t.denominator < t.numerator*this->denominator;
+		if (this->denominator == 0) {
+			return t.denominator > 0;
+		}
+		else if (t.denominator == 0) {
+			return false;
+		}
+		else {
+			return this->numerator*t.denominator < t.numerator*this->denominator;
+		}
 	}
 	return this->integer < t.integer;
 }

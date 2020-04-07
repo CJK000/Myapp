@@ -9,34 +9,54 @@ using namespace std;
 
 int main()
 {
-	Make m(100, 2);
+	Make m(10, 2);
 	vector<Expression> v;
 
+	cout << (Number(3, 1, 5) / Number(3, 0, 0)).ToString() << endl;
+
+//	if (Number(5, 0, 0).CheckNumber(3, 10) == true) {
+//		cout << "true\n";
+//	}
+//	else {
+//		cout << "false\n";
+//	}
+
+//	cout << (Number(0, 0, 0) / Number(0, 1, 8)).ToString();
+
+//	cout << Expression("10 * 3'1/3").answer.ToString();
+
+/*
 	for (int i = 0; i < 10000; i++) {
-		v = (m.*m.randMake[rand() % 4])(m.max_number, m.max_number, rand() % 3 + 1, 1);
+		v = (m.*m.randMake[rand() % 4])(m.max_number, m.max_number, 1, 1);
 		if (v.size() > 0) {
 			if (Expression(v[0].ToString()).Calculate() == v[0].answer) {
 				cout << "true\n";
 			}
 			else {
-				cout << v[0].ToString() << endl;
-				cout << Expression(v[0].ToString()).Calculate().ToString() << endl;
+				string s = v[0].ToString();
+				cout << s << endl;
+				cout << Expression(s).answer.ToString() << endl;
+				cout << v[0].answer.ToString() << endl;
+				cout << "false\n";
+				cout << s << endl;
+				cout << Expression(s).answer.ToString() << endl;
 				cout << v[0].answer.ToString() << endl;
 				cout << "false\n";
 			}
 		}
 	}
+*/
 
 
 /*
-	for (int i = 0; i < 10000; i++) {
-		v = m.RandPlus(m.max_number, m.max_number, 1, 1);
+	for (int i = 0; i < 10000000; i++) {
+		v = m.RandPlus(m.max_number, m.max_number, 3, 1);
 		if (v.size() > 0)cout << v[0].ToString() << " = " << v[0].answer.ToString() << endl;
-		v = m.RandMinus(m.max_number, m.max_number, 1, 1);
+		v = m.RandMinus(m.max_number, m.max_number, 2, 1);
 		if (v.size() > 0)cout << v[0].ToString() << " = " << v[0].answer.ToString() << endl;
-		v = m.RandMul(m.max_number, m.max_number, 1, 1);
+		v = m.RandMul(m.max_number, m.max_number, 2, 1);
 		if (v.size() > 0)cout << v[0].ToString() << " = " << v[0].answer.ToString() << endl;
-		v = m.RandDiv(m.max_number, m.max_number, 1, 1);
+		v = m.RandDiv(m.max_number, m.max_number, 2, 1);
 		if (v.size() > 0)cout << v[0].ToString() << " = " << v[0].answer.ToString() << endl;
 	}
 */
