@@ -19,6 +19,7 @@ Expression::Expression(string s) {
 	int t = 0;//插入新数字或符号前表达式长度
 	while (i < length) {
 		while (s[i] == ' ' || s[i] == '\n' || s[i] == '\r')i++;
+		if (i == length) return;	//初始化成功
 		if (s[i] >= '0'&&s[i] <= '9') {
 			this->Add(Number(s, i));
 		}
@@ -38,7 +39,7 @@ Expression::Expression(string s) {
 			case '=': {
 				i++;
 				while (i < length && (s[i] == ' ' || s[i] == '\n' || s[i] == '\r'))i++;
-				if (i != length) {	//输入出错
+				if (i < length) {	//输入出错
 					this->question.clear();
 					this->valid = false;
 					return;
