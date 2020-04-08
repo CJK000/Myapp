@@ -16,12 +16,18 @@ Expression Make::MakeProblem(void) {
 		v = (this->*this->randMake[rand() % 4])(this->max_number, this->max_number, rand() % 3 + 1, 1);
 		t++;
 	}
+	if (this->max_number > 1289) {	//最大数字大于 1289 时可能会生成错误的题目，判断一下题目是否正确
+		int n_ret;	//返回第 n 个式子
+		n_ret = rand() % v.size();
+		if (Expression(v[n_ret].ToString()).answer == v[n_ret].answer) {	//题目有效
+			return v[n_ret];
+		}
+		else {	//题目有错
+			return Expression();
+		}
+	}
 	return v[rand() % v.size()];
 }
-
-
-
-
 
 
 
@@ -37,10 +43,10 @@ void Make::Insert(Expression exp) {
 
 
 
-
+//生成 b + c = a
 vector<Expression> Make::RandPlus(int max_n, int max_de, int symbol_n, int output) {
 	vector<Expression> v;
-	Number a(max_n, max_de);	//生成 b + c = a
+	Number a(max_n, max_de);
 	Number b;
 	Number c;
 	if (symbol_n == 1) {
@@ -90,10 +96,10 @@ vector<Expression> Make::RandPlus(int max_n, int max_de, int symbol_n, int outpu
 
 
 
-
+//生成 a - b = c
 vector<Expression> Make::RandMinus(int max_n, int max_de, int symbol_n, int output) {
 	vector<Expression> v;
-	Number a(max_n, max_de);	//生成 a - b = c
+	Number a(max_n, max_de);
 	Number b, c;
 	if (max_n <= 1)return v;
 	while (a <= Number(1, 0, 0))a = Number(max_n, max_de);
@@ -140,11 +146,11 @@ vector<Expression> Make::RandMinus(int max_n, int max_de, int symbol_n, int outp
 
 
 
-
+//生成 b * c = a
 vector<Expression> Make::RandMul(int max_n, int max_de, int symbol_n, int output) {
 	Expression ret;
 	vector<Expression> v;
-	Number a(max_n, max_de);	//生成 b * c = a
+	Number a(max_n, max_de);
 	Number b;
 	Number c;
 	if (max_n == 0) return v;	//输入太小，难以生成题目，直接退出

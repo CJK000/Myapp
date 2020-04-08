@@ -45,6 +45,7 @@ Expression::Expression(string s) {
 					return;
 				}
 				else {
+					this->Calculate();
 					return;	//初始化成功
 				}
 			}

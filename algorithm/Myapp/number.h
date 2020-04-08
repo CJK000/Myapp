@@ -18,6 +18,7 @@ public:
 	void ClarifyNu();	//假分数化成带分数，调用前整数部分为正确数字
 	bool CheckNumber();	//检查当前 Number 对象是否为一个合法的数字，可用于判断其他运算返回的结果是否合法
 	bool CheckNumber(int max_n, int max_de);	//检查当前 Number 对象是否为一个合法的数字，可用于判断其他运算返回的结果是否合法
+	void CommonDenominator(Number &y);	//通分，参数整数部分默认为 0，分母不为 0
 	Number operator+(Number t);
 	Number operator-(Number t);
 	Number operator*(Number t);

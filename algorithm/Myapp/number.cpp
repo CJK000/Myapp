@@ -138,6 +138,7 @@ int Gcd(int x, int y) {	//最大公因数
 }
 
 void Number::ClarifyNu() {	//假分数化成带分数，调用前整数部分为正确数字
+	if (this->denominator == 0)return;
 	this->integer += this->numerator / this->denominator;
 	this->numerator %= this->denominator;
 	if (this->numerator == 0) this->denominator = 0;
@@ -148,76 +149,80 @@ void Number::ClarifyNu() {	//假分数化成带分数，调用前整数部分为正确数字
 	}
 }
 
+void Number::CommonDenominator(Number &y) {	//同分，参数整数部分默认为 0，分母不为 0
+	Number &x = *this;
+	int gcd = Gcd(x.denominator, y.denominator);
+	int xm, ym;
+	xm = y.denominator / gcd;
+	ym = x.denominator / gcd;
+	x.numerator *= xm;
+	x.denominator *= xm;
+	y.numerator *= ym;
+	y.denominator *= ym;
+}
+
+
+
 Number Number::operator+(Number t) {
-	Number ret;
-	int gcd;
-	ret.integer = this->integer + t.integer;
-	if (this->denominator != 0 && t.denominator != 0) {
-		ret.denominator = this->denominator * t.denominator;
-		ret.numerator = this->numerator*t.denominator + t.numerator*this->denominator;
-		ret.ClarifyNu();
-	}
-	else if (this->denominator != 0 || t.denominator != 0) {
-		ret.denominator = this->denominator + t.denominator;
-		ret.numerator = this->numerator + t.numerator;
-	}
-	else {
-		ret.denominator = 0;
-		ret.numerator = 0;
-	}
+	Number ret(this->integer, this->numerator, this->denominator);
+	ret.integer += t.integer;
+	if (ret.denominator == 0)ret.denominator = 1;
+	if (t.denominator == 0)t.denominator = 1;
+	ret.CommonDenominator(t);
+	ret.numerator += t.numerator;
+	ret.ClarifyNu();
 	return ret;
 }
 
 
 
 Number Number::operator-(Number t) {
-	Number ret;
-	int gcd;
-	ret.integer = this->integer - t.integer;
-	if (this->denominator != 0 && t.denominator != 0) {
-		ret.denominator = this->denominator * t.denominator;
-		ret.numerator = this->numerator*t.denominator - t.numerator*this->denominator;
-		if (ret.numerator == 0) {
-			ret.denominator = 0;
-		}
-		else {
-			if (ret.numerator < 0) {
-				ret.integer--;
-				ret.numerator += ret.denominator;
-			}
-			ret.ClarifyNu();
-		}
-	}
-	else if (this->denominator != 0) {
-		ret.denominator = this->denominator;
-		ret.numerator = this->numerator;
-	}
-	else if (t.denominator != 0) {
+	Number ret(this->integer, this->numerator, this->denominator);
+	ret.integer -= t.integer;
+	if (ret.denominator == 0)ret.denominator = 1;
+	if (t.denominator == 0)t.denominator = 1;
+	ret.CommonDenominator(t);
+	ret.numerator -= t.numerator;
+	if (ret.numerator < 0) {
 		ret.integer--;
-		ret.denominator = t.denominator;
-		ret.numerator = ret.denominator - t.numerator;
+		ret.numerator += ret.denominator;
 	}
-	else {
-		ret.denominator = 0;
-		ret.numerator = 0;
-	}
+	ret.ClarifyNu();
 	return ret;
 }
 
 
 
 Number Number::operator*(Number t) {
-	Number ret(this->integer, this->numerator, this->denominator);
-	if (ret.denominator == 0) ret.denominator = 1;
-	if (t.denominator == 0) t.denominator = 1;
-	ret.numerator = ret.denominator*ret.integer + ret.numerator;
-	t.numerator = t.denominator*t.integer + t.numerator;
-	if (ret.numerator == 0 || t.numerator == 0) return Number();
-	ret.numerator *= t.numerator;
-	ret.denominator *= t.denominator;
-	ret.integer = 0;
-	ret.ClarifyNu();
+	Number x(this->integer, this->numerator, this->denominator);
+	int gcd;
+
+	//整数部分相乘
+	Number ret(this->integer*t.integer, 0, 0);
+
+	//预处理
+	if (x.denominator == 0)x.denominator = 1;
+	if (t.denominator == 0)t.denominator = 1;
+
+	//左运算数的整数部分乘以右运算数的分数部分
+	gcd = Gcd(x.integer, t.denominator);
+	ret = ret + Number(0, x.integer / gcd * t.numerator, t.denominator / gcd);
+
+	//左运算数的分数部分乘以右运算数的整数部分
+	gcd = Gcd(x.denominator, t.integer);
+	ret = ret + Number(0, t.integer / gcd * x.numerator, x.denominator / gcd);
+
+	//左运算数的分数部分乘以右运算数的分数部分
+	gcd = Gcd(x.numerator, t.denominator);
+	x.numerator /= gcd;
+	t.denominator /= gcd;
+	gcd = Gcd(x.denominator, t.numerator);
+	x.denominator /= gcd;
+	t.numerator /= gcd;
+	ret = ret + Number(0, x.numerator * t.numerator, x.denominator*t.denominator);
+
 	return ret;
+
 }
 
 

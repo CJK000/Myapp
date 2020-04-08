@@ -20,11 +20,45 @@ int main()
 //		cout << "false\n";
 //	}
 
-//	cout << (Number(0, 0, 0) / Number(0, 1, 8)).ToString();
+//	cout << (Number(0, 1, 1283) / Number(1289, 1, 1291)).ToString() << endl;
 
-//	cout << Expression("10 * 3'1/3").answer.ToString();
+//	cout << Expression("1'2235/6638 * 7010'188/285 =").answer.ToString();
 
-	Make m(4);
+
+
+
+/*
+	Make *m;
+	Expression e;
+	int cnt = 0;
+	int maxn = 50000;
+	while(1) {
+		m = new Make(maxn);
+		cout << maxn << endl;
+		while (1) {
+			e = m->MakeProblem();
+			if (e.question.size() > 0) {
+				if (Expression(e.ToString()).Calculate() != e.answer) {
+					maxn--;
+					string s = e.ToString();
+					cout << s << endl;
+					cout << Expression(s).answer.ToString() << endl;
+					cout << e.answer.ToString() << endl;
+					cout << "false\n\n";
+					delete m;
+					break;
+				}
+			}
+		}
+	}
+*/
+
+
+
+
+
+
+	Make m(129000007);
 	Expression e;
 	int cnt = 0;
 	while(1) {
@@ -32,7 +66,10 @@ int main()
 		if (e.question.size() > 0) {
 			if (Expression(e.ToString()).Calculate() == e.answer) {
 				cnt++;
-				cout << cnt << " " << "true\n";
+				if (cnt % 1000 == 0) {
+					cout << cnt << " " << "true\n";
+//					return 0;
+				}
 			}
 			else {
 				string s = e.ToString();
