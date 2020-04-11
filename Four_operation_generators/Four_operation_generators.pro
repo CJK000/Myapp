@@ -16,19 +16,30 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    algorithm/expression.cpp \
+    algorithm/make.cpp \
+    algorithm/number.cpp \
     form.cpp \
     form1.cpp \
     form2.cpp \
     form3.cpp \
     main.cpp \
+    result.cpp \
+    success_ui.cpp \
+    unsuccess_ui.cpp \
     widget.cpp
 
 HEADERS += \
+    algorithm/expression.h \
+    algorithm/make.h \
+    algorithm/number.h \
     form.h \
     form1.h \
     form2.h \
     form3.h \
-    setting.h \
+    result.h \
+    success_ui.h \
+    unsuccess_ui.h \
     widget.h
 
 FORMS += \
@@ -36,6 +47,9 @@ FORMS += \
     form1.ui \
     form2.ui \
     form3.ui \
+    result.ui \
+    success_ui.ui \
+    unsuccess_ui.ui \
     widget.ui
 
 # Default rules for deployment.
@@ -47,3 +61,7 @@ RESOURCES += \
     icon.qrc
 
 DISTFILES +=
+
+
+WIN32:
+CONFIG +=console

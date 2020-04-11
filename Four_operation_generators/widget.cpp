@@ -4,7 +4,6 @@
 #include "form1.h"
 #include"form2.h"
 #include"form3.h"
-#include "setting.h"
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
