@@ -25,12 +25,12 @@ int main()
 
 //	cout << Expression("1'2235/6638 * 7010'188/285 =").answer.ToString();
 
-/*
+
 	int max_number;
 	int problem_number;
-	max_number = 10;
-	problem_number = 30000;
-	Make m(max_number);	//初始化一个 Make 类，参数为最大数字
+	max_number = 10000000;
+	problem_number = 3000;
+	Make m(max_number, problem_number);	//初始化一个 Make 类，参数为最大数字
 	Expression problem;	//用于接收返回的题目
 	int cnt = 0;	//计数器，计算已生成题目的数量
 	while (cnt < problem_number) {
@@ -46,7 +46,7 @@ int main()
 			return 0;
 		}
 	}
-*/
+
 
 
 
@@ -100,8 +100,8 @@ int main()
 
 
 
-
-	Make m(2,1);
+/*
+	Make m(1,1);
 	Expression e;
 	int cnt = 0;
 	while(1) {

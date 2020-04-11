@@ -19,10 +19,10 @@ bool Make::CheckNumber() {
 	else if (this->max_number == 1) {
 		if (this->problem_number > 40)return false;
 	}
-	else if (this->max_number == 1) {
+	else if (this->max_number == 2) {
 		if (this->problem_number > 500)return false;
 	}
-	else if (this->max_number == 2) {
+	else if (this->max_number == 3) {
 		if (this->problem_number > 5000)return false;
 	}
 	else if (this->problem_number > 10000)return false;
@@ -35,15 +35,18 @@ Expression Make::MakeProblem(void) {
 	vector<Expression> v;	//接收生成题目的返回值
 	while (v.size() == 0) {
 		v = (this->*this->randMake[rand() % 4])(this->max_number, this->max_number, rand() % 3 + 1, 1);
-	}
-	if (this->max_number > 1289) {	//最大数字大于 1289 时可能会生成错误的题目，判断一下题目是否正确
-		int n_ret;	//返回第 n 个式子
-		n_ret = rand() % v.size();
-		if (Expression(v[n_ret].ToString()).answer == v[n_ret].answer) {	//题目有效
-			return v[n_ret];
-		}
-		else {	//题目有错
-			return Expression();
+		if (this->max_number > 1289) {	//最大数字大于 1289 时可能会生成错误的题目，判断一下题目是否正确
+			if (v.size() > 0) {
+				int n_ret;	//返回第 n 个式子
+				n_ret = rand() % v.size();
+				if (Expression(v[n_ret].ToString()).answer == v[n_ret].answer) {	//题目有效
+					return v[n_ret];
+				}
+				else {	//题目有错
+					v.clear();
+				}
+			}
+	
 		}
 	}
 	return v[rand() % v.size()];
