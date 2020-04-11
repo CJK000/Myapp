@@ -11,6 +11,7 @@ using namespace std;
 int main()
 {
 
+
 //	cout << (Number(18, 0, 0) / Number(18, 1, 2)).ToString() << endl;
 
 //	if (Number(5, 0, 0).CheckNumber(3, 10) == true) {
@@ -24,6 +25,28 @@ int main()
 
 //	cout << Expression("1'2235/6638 * 7010'188/285 =").answer.ToString();
 
+/*
+	int max_number;
+	int problem_number;
+	max_number = 10;
+	problem_number = 30000;
+	Make m(max_number);	//初始化一个 Make 类，参数为最大数字
+	Expression problem;	//用于接收返回的题目
+	int cnt = 0;	//计数器，计算已生成题目的数量
+	while (cnt < problem_number) {
+		problem = m.MakeProblem();	//生成一个符合要求的题目
+		if (problem.question.size() > 0) {	//返回值里面有题目，生成题目成功
+			cout << cnt + 1 << ".";
+			cout << problem.ToString() << endl;
+			//out<<problem.answer.ToString() << endl;
+			cnt++;	//计数器加一
+		}
+		else {
+			//生成题目失败，整数最大值太小，无法生成指定数量题目。
+			return 0;
+		}
+	}
+*/
 
 
 
@@ -53,12 +76,32 @@ int main()
 	}
 */
 
+/*
+	cout << Number(" 1/5 ").ToString();
+*/
 
 
 
 
 
-	Make m(129000007);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	Make m(2,1);
 	Expression e;
 	int cnt = 0;
 	while(1) {
@@ -66,17 +109,17 @@ int main()
 		if (e.question.size() > 0) {
 			if (Expression(e.ToString()).Calculate() == e.answer) {
 				cnt++;
-				if (cnt % 1000 == 0) {
+//				if (cnt % 1000 == 0) {
 					cout << cnt << " " << "true\n";
 //					return 0;
-				}
+//				}
 			}
 			else {
 				string s = e.ToString();
 				cout << s << endl;
 				cout << Expression(s).answer.ToString() << endl;
 				cout << e.answer.ToString() << endl;
-				cout << "false\n";
+				cout << "false\n\n";
 			}
 		}
 	}

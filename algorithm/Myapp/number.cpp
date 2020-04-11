@@ -82,32 +82,42 @@ void CatchInt(string s, int &i, int &a) {	//从字符串中读出一个整数放到x
 
 
 Number::Number(string s, int &i) {	//用一个代表数字的字符串初始化数字对象
-	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\r')i++;
-	if (s[i]<'0' || s[i]>'9') {
+	this->denominator = 0;
+	this->numerator = 0;
+	this->integer = 0;
+	while (i < s.length() && s[i] == ' ')i++;
+	if (i==s.length() || s[i]<'0' || s[i]>'9') {
 		this->integer = -1;
 		return;
 	}
 	CatchInt(s, i, this->integer);
-	this->denominator = 0;
-	this->numerator = 0;
 	if (i == s.length()) return;
-	if (s[i]!= '\'') {
-		if (s[i] == ' ' || s[i] == '\n' || s[i]=='\r') {	//初始化成功
-			return;
-		}
-		else {	//初始化失败
-			this->numerator = -1;
-			return;
+	if (s[i]!= '\''&& s[i]!='/' && s[i]!=' ') this->numerator = -1;	//初始化失败
+	else if (s[i] == '\'') {	//进入分支读取分子
+		i++;
+		if (s[i]<'0' || s[i]>'9') this->numerator = -1;	//分子格式出错，读取失败
+		else{
+			CatchInt(s, i, this->numerator);
+			if (s[i] != '/') this->denominator = -1;	//分式格式出错，初始化失败
+			else {	//进入分支读取分母
+				i++;
+				if (s[i]<'0' || s[i]>'9') this->denominator = -1;	//分母格式出错，读取失败
+				else{
+					CatchInt(s, i, this->denominator);
+					if (i < s.length() && s[i] != ' ') this->denominator = -1;	//分母格式出错，读取失败
+				}
+			}
 		}
 	}
-	i++;
-	CatchInt(s, i, this->numerator);
-	if (s[i] != '/') {	//初始化失败
-		this->denominator = -1;
-		return;
+	else if (s[i] == '/') {
+		i++;
+		if (i == s.length() || (s[i]<'0'&&s[i]>'9'))this->denominator = -1;
+		else {
+			swap(this->integer, this->numerator);
+			CatchInt(s, i, this->denominator);
+			if (i < s.length() && s[i] != ' ') this->denominator = -1;	//失败
+		}
 	}
-	i++;
-	CatchInt(s, i, this->denominator);
 }
 
 Number::Number(string str) {
@@ -118,13 +128,15 @@ Number::Number(string str) {
 
 string Number::ToString() {	//将储字转换成字符串
 	char s[20];
-	string str(itoa(this->integer, s, 10));
+	string str;
+	if(this->integer!=0) str += itoa(this->integer, s, 10);
 	if (this->denominator != 0) {
-		str += '\'';
+		if (this->integer != 0) str += '\'';
 		str += itoa(this->numerator, s, 10);
 		str += '/';
 		str += itoa(this->denominator, s, 10);
 	}
+	else if (this->integer == 0)str += '0';
 	return str;
 }
 

@@ -30,9 +30,6 @@ public:
 	bool operator==(Number t);
 	bool operator!=(Number t);
 	void Print();	//用于测试
-
 };
-
-
 
 void CatchInt(string s, int &i, int &a);	//从字符串中读出一个整数

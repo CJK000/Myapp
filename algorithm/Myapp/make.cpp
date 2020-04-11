@@ -6,15 +6,35 @@
 
 
 
+Make::Make(int n, int m) {
+	this->max_number = n;
+	this->problem_number = m;
+	stringSet.clear();
+	srand(time(0));
+}
+
+bool Make::CheckNumber() {
+	if (this->max_number <= 0)return false;
+	else if (this->problem_number <= 0)return false;
+	else if (this->max_number == 1) {
+		if (this->problem_number > 40)return false;
+	}
+	else if (this->max_number == 1) {
+		if (this->problem_number > 500)return false;
+	}
+	else if (this->max_number == 2) {
+		if (this->problem_number > 5000)return false;
+	}
+	else if (this->problem_number > 10000)return false;
+	else return true;
+}
+
+
 Expression Make::MakeProblem(void) {
+	if (this->CheckNumber() == false)return Expression();
 	vector<Expression> v;	//接收生成题目的返回值
-	int t = 0;
 	while (v.size() == 0) {
-		if (t == 15) {
-			return Expression();	//生成题目失败，整数最大值太小，无法生成指定数量题目。
-		}
 		v = (this->*this->randMake[rand() % 4])(this->max_number, this->max_number, rand() % 3 + 1, 1);
-		t++;
 	}
 	if (this->max_number > 1289) {	//最大数字大于 1289 时可能会生成错误的题目，判断一下题目是否正确
 		int n_ret;	//返回第 n 个式子
