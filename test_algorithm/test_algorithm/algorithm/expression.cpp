@@ -18,7 +18,8 @@ Expression::Expression(string s) {
 	int length = s.length();
 	int t = 0;//插入新数字或符号前表达式长度
 	while (i < length) {
-		while (s[i] == ' ' || s[i] == '\n' || s[i] == '\r')i++;
+        while (i < length && s[i] == ' ')i++;
+		if (i == length) break;	//初始化成功
 		if (s[i] >= '0'&&s[i] <= '9') {
 			this->Add(Number(s, i));
 		}
@@ -37,13 +38,14 @@ Expression::Expression(string s) {
 			}
 			case '=': {
 				i++;
-				while (i < length && (s[i] == ' ' || s[i] == '\n' || s[i] == '\r'))i++;
-				if (i != length) {	//输入出错
+                while (i < length && (s[i] == ' '))i++;
+				if (i < length) {	//输入出错
 					this->question.clear();
 					this->valid = false;
 					return;
 				}
 				else {
+					this->Calculate();
 					return;	//初始化成功
 				}
 			}
@@ -70,13 +72,15 @@ string Expression::ToString() {
 	for (Point x : this->question) {
 		if (x.type == 1) {
 			s += x.num.ToString();
-			s += ' ';
+            s += ' ';
 		}
 		else {
 			s += x.symbol;
-			s += ' ';
+            s += ' ';
 		}
 	}
+	s += '=';
+    s += ' ';
 	return s;
 }
 
@@ -162,6 +166,8 @@ bool Expression::CheckValid() {
 					if (c1 != '(' && c1 != ')') {
 						return this->valid = false;
 					}
+				}
+				if (this->question[i + 1].type == 0) {
 					c2 = this->question[i + 1].symbol;
 					if (c2 != '(' && c2 != ')') {
 						return this->valid = false;

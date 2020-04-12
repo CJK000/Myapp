@@ -4,11 +4,11 @@ using namespace std;
 
 class Point {
 	public:
-		int type;	// 0 表示符号, 1表示数字
-		char symbol;	//运算符
-		Number num;		//数字
-		Point(Number n);
-		Point(char c);
+		int type;//标记当前结构体代表的意义， 0 表示符号, 1表示数字
+		char symbol;//运算符
+		Number num;	//数字
+		Point(Number n);// 用一个 Number 对象初始化当前 Point 对象
+		Point(char c);//用一个符号初始化当前 Point 对象
 };
 
 //表达式类，在 Make 类中作为参数类型，本类不被单独使用
@@ -32,5 +32,5 @@ class Expression {
 		void clear();	//清空对象当前内容
 		bool CheckValid();	//判断当前题目是否合法
 		vector<Point> Nifix2Postfix();	//中缀转后缀，后缀表达式用vector存放 
-		Number Calculate();	//计算当前题目的答案	//
+		Number Calculate();	//计算当前题目的答案
 };
