@@ -28,6 +28,20 @@ protected:
     }
 };
 
+class MyTestSuite1 : public testing::Test
+{
+protected:
+    static void SetUpTestSuite()
+    {
+        cout << "TestSuite event1 : start" << endl;
+    }
+
+    static void TearDownTestSuite()
+    {
+        cout << "TestSuite event1 : end" << endl;
+    }
+};
+
 
 
 //TEST_F(MyTestSuite0, CheckNumber)//²âÊÔchecknumberº¯Êý
@@ -104,6 +118,72 @@ TEST_F(MyTestSuite0, str_build_num)//Number(string str)ºÍNumber(string str, int 
         EXPECT_STREQ(a[i], c.ToString().c_str())<<"²âÊÔNumber(string str)";
     }
 }
+
+TEST_F(MyTestSuite1, build_problem_10) {
+    build_problem(10, 10);
+}
+
+TEST_F(MyTestSuite1, build_problem_100) {
+    build_problem(100, 100);
+}
+
+TEST_F(MyTestSuite1, build_problem_1000) {
+    build_problem(1000, 1000);
+}
+
+TEST_F(MyTestSuite1, build_problem_10000) {
+    build_problem(10000, 10000);
+}
+
+TEST_F(MyTestSuite1, check_answer_10) {
+    for (int i = 0; i < 10; i++) {
+        check_answer("7 / 2 + 6'3/10 =", "9'4/5");
+    }
+}
+
+TEST_F(MyTestSuite1, check_answer_100) {
+    for (int i = 0; i < 100; i++) {
+        check_answer("40'1 / 10 - (18'4 / 5 - 1) =", "22'3 / 10");
+    }
+}
+
+TEST_F(MyTestSuite1, check_answer_1000) {
+    for (int i = 0; i < 1000; i++) {
+        check_answer("837'407/857 - ( 60 + 126 ) =", "651'407/857");
+    }
+}
+
+TEST_F(MyTestSuite1, check_answer_10000) {
+    for (int i = 0; i < 10000; i++) {
+        check_answer("1211'4558/9247 - ( 61 + 354 ) =", "796'4558/9247");
+    }
+}
+
+TEST_F(MyTestSuite1, getpoint_problem_10) {
+    for (int i = 0; i < 10; i++) {
+        getpoint_problem("5.7 / 2 + 6'3/10 =");
+    }
+}
+
+TEST_F(MyTestSuite1, getpoint_problem_100) {
+    for (int i = 0; i < 100; i++) {
+        getpoint_problem("23.40'1 / 10 - (18'4 / 5 - 1) =");
+    }
+}
+
+TEST_F(MyTestSuite1, getpoint_problem_1000) {
+    for (int i = 0; i < 1000; i++) {
+        getpoint_problem("110.837'407/857 - ( 60 + 126 ) =");
+    }
+}
+
+TEST_F(MyTestSuite1, getpoint_problem_10000) {
+    for (int i = 0; i < 10000; i++) {
+        getpoint_problem("1111.1211'4558/9247 - ( 61 + 354 ) =");
+    }
+}
+
+
 
 int main(int argc, char* argv[])
 {
