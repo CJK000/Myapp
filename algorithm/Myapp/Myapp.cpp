@@ -3,13 +3,30 @@
 #include"number.h"
 #include"expression.h"
 #include"make.h"
+#include<cstdio>
+#include<cstdlib>
+#include<time.h>
+#include<fstream>
 #include <iostream>
 #define PROBLEM_NUMBER 100	//需要生成的题目数量
 using namespace std;
 
+void Write(int r, int n);
+void analyse();
 
 int main()
 {
+	clock_t start, finish, cost;
+	for (long long r = 10000; r <= INT_MAX; ) {
+		start = clock();
+		Write(r, 10000);
+		finish = clock();
+		cost = finish - start;
+		cout << r << '\t' << cost << endl;
+		r = r + r / 10;
+	}
+	
+//	analyse();
 
 
 //	cout << (Number(18, 0, 0) / Number(18, 1, 2)).ToString() << endl;
@@ -25,7 +42,7 @@ int main()
 
 //	cout << Expression("1'2235/6638 * 7010'188/285 =").answer.ToString();
 
-
+/*
 	int max_number;
 	int problem_number;
 	max_number = 10000000;
@@ -46,7 +63,7 @@ int main()
 			return 0;
 		}
 	}
-
+*/
 
 
 
@@ -79,24 +96,6 @@ int main()
 /*
 	cout << Number(" 1/5 ").ToString();
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -138,23 +137,6 @@ int main()
 		if (v.size() > 0)cout << v[0].ToString() << " = " << v[0].answer.ToString() << endl;
 	}
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -213,6 +195,65 @@ int main()
 */
 
 }
+
+
+void analyse() {
+	clock_t start, finish, cost;
+	ofstream time;
+	time.open("time.txt", ios::out);
+	for (long long r = 4; r < 10; r++) {
+		start = clock();
+		Write(r, 10000);
+		finish = clock();
+		cost = finish - start;
+		time << r << '\t' << cost << endl;
+		cout << r << '\t' << cost << endl;
+	}
+	for (long long r = 10; r <= INT_MAX; ) {
+		start = clock();
+		Write(r, 10000);
+		finish = clock();
+		cost = finish - start;
+		time << r << '\t' << cost << endl;
+		cout << r << '\t' << cost << endl;
+		r = r + r / 10;
+	}
+}
+
+void Write(int r, int n) {
+	ofstream out;
+	out.open("output.txt", ios::out);
+	ofstream ans;
+	ans.open("ans.txt", ios::out);
+	Make m(r, n);
+	Expression exp;
+	int cnt=1;
+	while (cnt<=n) {
+		exp = m.MakeProblem();
+		out << cnt << "." << exp.ToString() << endl;
+		ans << cnt << "." << exp.answer.ToString() << endl;
+		cnt++;
+	}
+	out.close();
+	ans.close();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单

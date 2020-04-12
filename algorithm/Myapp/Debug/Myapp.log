@@ -1,4 +1,5 @@
-﻿  make.cpp
-d:\学习\dev-c++\编译\软件工程\myapp\algorithm\myapp\make.cpp(13): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
-d:\学习\dev-c++\编译\软件工程\myapp\algorithm\myapp\make.cpp(30): warning C4715: “Make::CheckNumber”: 不是所有的控件路径都返回值
+﻿  Myapp.cpp
+d:\学习\dev-c++\编译\软件工程\myapp\algorithm\myapp\myapp.cpp(22): warning C4244: “参数”: 从“__int64”转换到“int”，可能丢失数据
+d:\学习\dev-c++\编译\软件工程\myapp\algorithm\myapp\myapp.cpp(206): warning C4244: “参数”: 从“__int64”转换到“int”，可能丢失数据
+d:\学习\dev-c++\编译\软件工程\myapp\algorithm\myapp\myapp.cpp(214): warning C4244: “参数”: 从“__int64”转换到“int”，可能丢失数据
   Myapp.vcxproj -> D:\学习\dev-c++\编译\软件工程\Myapp\algorithm\Debug\Myapp.exe
