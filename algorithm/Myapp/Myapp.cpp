@@ -16,6 +16,7 @@ void analyse();
 
 int main()
 {
+/*
 	clock_t start, finish, cost;
 	for (long long r = 10000; r <= INT_MAX; ) {
 		start = clock();
@@ -25,9 +26,10 @@ int main()
 		cout << r << '\t' << cost << endl;
 		r = r + r / 10;
 	}
-	
+*/
 //	analyse();
 
+//	Write(1, 50);
 
 //	cout << (Number(18, 0, 0) / Number(18, 1, 2)).ToString() << endl;
 
@@ -73,7 +75,7 @@ int main()
 	int cnt = 0;
 	int maxn = 50000;
 	while(1) {
-		m = new Make(maxn);
+		m = new Make(maxn, 10);
 		cout << maxn << endl;
 		while (1) {
 			e = m->MakeProblem();
@@ -99,8 +101,8 @@ int main()
 
 
 
-/*
-	Make m(1,1);
+
+	Make m(8,1);
 	Expression e;
 	int cnt = 0;
 	while(1) {
@@ -108,10 +110,10 @@ int main()
 		if (e.question.size() > 0) {
 			if (Expression(e.ToString()).Calculate() == e.answer) {
 				cnt++;
-//				if (cnt % 1000 == 0) {
+				if (cnt % 1000 == 0) {
 					cout << cnt << " " << "true\n";
 //					return 0;
-//				}
+				}
 			}
 			else {
 				string s = e.ToString();

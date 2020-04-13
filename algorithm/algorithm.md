@@ -4,7 +4,7 @@
 
 ​    
 
-#### 1、Number类（已实现）：
+#### 1、Number类：
 
 + 成员变量：数字三部分：整数、分母、分子
 
@@ -51,7 +51,7 @@
 
   + `bool CheckNumber();//检查当前 Number 对象是否为一个合法的数字，可用于判断其他运算返回的结果是否合法`
 
-#### 2、Expression类（已实现）：
+#### 2、Expression类：
 
 + 成员变量：
 
@@ -103,18 +103,22 @@
 
 ​	成员变量：`int max_number;//题目中的最大数字`
 
-​	这个类实现随机生成题目的函数，分别实现生成加减乘除题目的函数，在函数中可以递归调用任意一个生成题目的函数作为本次生成题目的子部分，，根据函数接收的参数决定是否还需继续递归调用，根据另一个参数确定本次调用是否为第一次调用，如果时第一次调用则需要向用户输出内容，在返回值之前需要进行查重，如果不需要向用户输出则本次调用不需要查重。
+​			   `int problem_number;//要求生成题目的数量`
+
+​	这个类实现随机生成题目的函数，分别实现生成加减乘除题目的函数，在函数中可以递归调用任意一个生成题目的函数作为本次生成题目的子部分，，根据函数接收的参数决定是否还需继续递归调用，根据另一个参数确定本次调用是否为第一次调用，如果时第一次调用则需要向用户输出内容，在返回值之前需要进行查重，如果不需要向用户输出则本次调用不需要查重，如果没有重复，则把所有题目存入到 Trie 树中。
 
 ```c++
 class Make {
 private:
 	int max_number;	//最大数字
-	set<string> stringSet;	//将生成的题目和所有等价的题目插入此，用于查重
+	int problem_number;
+	bool CheckNumber();
+//	set<string> stringSet;	//将生成的题目和所有等价的题目插入此，用于查重
+//	bool CheckExist(Expression exp);	//检查此题目是否已生成
+//	void Insert(Expression exp);	//将一个题目插入到 stringSet中
 	typedef vector<Expression> (Make::*Function_ptr)(int, int, int, int);
 	//函数指针数组 randMake[4] 的四个元素为随机生成题目的函数指针，方便随机调用时使用
 	const Function_ptr randMake[4] = {&Make::RandPlus, &Make::RandMinus, &Make::RandMul, &Make::RandDiv };
-	bool CheckExist(Expression exp);	//检查此题目是否已生成
-	void Insert(Expression exp);	//将一个题目插入到 stringSet中
 
 	//以下四个函数为随机生成题目函数
 	//max_n 为题目中数字整数部分的最大值，生成的数字式子的答案不能大于 max_n
@@ -132,18 +136,15 @@ private:
 	vector<Expression> RandDiv(int max_n, int max_de, int symbol_n, int output);
 
 public:
-	Make(int n) {
-		this->max_number = n;
-		stringSet.clear();
-		srand(time(0));
-	}
+	Trie trie;
+	Make(int n, int m);
 	Expression MakeProblem(void);	//供给主函数调用，返回一个随机生成运算符不超过3个的正确题目
 };
 ```
 
----
 
-#### 算法逻辑
+
+#### 生成题目算法逻辑
 
 ![算法逻辑](https://img2020.cnblogs.com/blog/1814040/202004/1814040-20200412141411077-551629482.png)
 
@@ -153,7 +154,7 @@ public:
 
 证明：
 
-设 $p_1, p_2, p_3, p_4, p_5$ 为互不相等的素数素数。
+设 $p_1, p_2, p_3, p_4, p_5​$ 为互不相等的素数素数。
 
 进行除法运算时，$\frac{1}{p_2}\div p_3\frac{p_5-1}{p_5}$，即 $\frac{1}{p_2}\times\frac{p_5}{p_3\times p_5+p_4}$，此时分母最大，编写验证程序。
 

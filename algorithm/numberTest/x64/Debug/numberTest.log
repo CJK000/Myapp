@@ -1,0 +1,6 @@
+﻿    正在创建库 D:\学习\dev-c++\编译\软件工程\Myapp\algorithm\x64\Debug\numberTest.lib 和对象 D:\学习\dev-c++\编译\软件工程\Myapp\algorithm\x64\Debug\numberTest.exp
+numberTest.obj : error LNK2019: 无法解析的外部符号 "public: __cdecl Number::Number(int,int,int)" (??0Number@@QEAA@HHH@Z)，该符号在函数 "public: void __cdecl numberTest::numberTest::TestMethod1(void)" (?TestMethod1@numberTest@1@QEAAXXZ) 中被引用
+numberTest.obj : error LNK2019: 无法解析的外部符号 "public: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl Number::ToString(void)" (?ToString@Number@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ)，该符号在函数 "public: void __cdecl numberTest::numberTest::TestMethod2(void)" (?TestMethod2@numberTest@1@QEAAXXZ) 中被引用
+numberTest.obj : error LNK2019: 无法解析的外部符号 "public: class Number __cdecl Number::operator+(class Number)" (??HNumber@@QEAA?AV0@V0@@Z)，该符号在函数 "public: void __cdecl numberTest::numberTest::TestMethod2(void)" (?TestMethod2@numberTest@1@QEAAXXZ) 中被引用
+numberTest.obj : error LNK2019: 无法解析的外部符号 "public: bool __cdecl Number::operator>(class Number)" (??ONumber@@QEAA_NV0@@Z)，该符号在函数 "public: void __cdecl numberTest::numberTest::TestMethod1(void)" (?TestMethod1@numberTest@1@QEAAXXZ) 中被引用
+D:\学习\dev-c++\编译\软件工程\Myapp\algorithm\x64\Debug\numberTest.dll : fatal error LNK1120: 4 个无法解析的外部命令

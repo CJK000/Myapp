@@ -7,15 +7,16 @@
 
 
 Make::Make(int n, int m) {
-	this->max_number = n;
+	this->max_number = n-1;
 	this->problem_number = m;
-	stringSet.clear();
+//	stringSet.clear();
 	srand(time(0));
 }
 
 bool Make::CheckNumber() {
-	if (this->max_number <= 0)return false;
+	if (this->max_number < 0)return false;
 	else if (this->problem_number <= 0)return false;
+	else if (this->max_number == 0 && this->problem_number > 1)return false;
 	else if (this->max_number == 1) {
 		if (this->problem_number > 40)return false;
 	}
@@ -25,13 +26,14 @@ bool Make::CheckNumber() {
 	else if (this->max_number == 3) {
 		if (this->problem_number > 5000)return false;
 	}
-	else if (this->problem_number > 10000)return false;
+	else if (this->max_number < 8) if(this->problem_number > 10000)return false;
+	else if (this->problem_number > 100000)return false;
 	else return true;
 }
 
 
 Expression Make::MakeProblem(void) {
-	if (this->CheckNumber() == false)return Expression();
+//	if (this->CheckNumber() == false)return Expression();
 	vector<Expression> v;	//接收生成题目的返回值
 	while (v.size() == 0) {
 		v = (this->*this->randMake[rand() % 4])(this->max_number, this->max_number, rand() % 3 + 1, 1);
@@ -55,7 +57,7 @@ Expression Make::MakeProblem(void) {
 
 
 
-
+/*
 bool Make::CheckExist(Expression exp) {
 	return this->stringSet.find(exp.ToString()) != this->stringSet.end() ;
 }
@@ -63,6 +65,7 @@ bool Make::CheckExist(Expression exp) {
 void Make::Insert(Expression exp) {
 	this->stringSet.insert(exp.ToString());
 }
+*/
 
 
 
@@ -105,9 +108,9 @@ vector<Expression> Make::RandPlus(int max_n, int max_de, int symbol_n, int outpu
 		}
 	}
 	if (output == 1) {
-		if (v.size() > 0 && this->CheckExist(v[0]) == false) {
+		if (v.size() > 0 && this->trie.Insert(v[0].ToString()) == true) {
 			for (Expression e : v) {
-				this->Insert(e);
+				this->trie.Insert(e.ToString());
 			}
 		}
 		else {
@@ -154,9 +157,9 @@ vector<Expression> Make::RandMinus(int max_n, int max_de, int symbol_n, int outp
 		}
 	}
 	if (output == 1) {
-		if (v.size() > 0 && this->CheckExist(v[0]) == false) {
+		if (v.size() > 0 && this->trie.Insert(v[0].ToString()) == true) {
 			for (Expression e : v) {
-				this->Insert(e);
+				this->trie.Insert(e.ToString());
 			}
 		}
 		else {
@@ -218,9 +221,9 @@ vector<Expression> Make::RandMul(int max_n, int max_de, int symbol_n, int output
 		}
 	}
 	if (output == 1) {
-		if (v.size() > 0 && this->CheckExist(v[0]) == false) {
+		if (v.size() > 0 && this->trie.Insert(v[0].ToString()) == true) {
 			for (Expression e : v) {
-				this->Insert(e);
+				this->trie.Insert(e.ToString());
 			}
 		}
 		else {
@@ -271,9 +274,9 @@ vector<Expression> Make::RandDiv(int max_n, int max_de, int symbol_n, int output
 		}
 	}
 	if (output == 1) {
-		if (v.size() > 0 && this->CheckExist(v[0]) == false) {
+		if (v.size() > 0 && this->trie.Insert(v[0].ToString()) == true) {
 			for (Expression e : v) {
-				this->Insert(e);
+				this->trie.Insert(e.ToString());
 			}
 		}
 		else {
