@@ -1,0 +1,6 @@
+﻿    正在创建库 D:\学习\dev-c++\编译\软件工程\Myapp\algorithm\Release\numberTest.lib 和对象 D:\学习\dev-c++\编译\软件工程\Myapp\algorithm\Release\numberTest.exp
+numberTest.obj : error LNK2001: 无法解析的外部符号 "public: bool __thiscall Number::operator>(class Number)" (??ONumber@@QAE_NV0@@Z)
+numberTest.obj : error LNK2001: 无法解析的外部符号 "public: __thiscall Number::Number(int,int,int)" (??0Number@@QAE@HHH@Z)
+numberTest.obj : error LNK2001: 无法解析的外部符号 "public: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __thiscall Number::ToString(void)" (?ToString@Number@@QAE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ)
+numberTest.obj : error LNK2001: 无法解析的外部符号 "public: class Number __thiscall Number::operator+(class Number)" (??HNumber@@QAE?AV0@V0@@Z)
+D:\学习\dev-c++\编译\软件工程\Myapp\algorithm\Release\numberTest.dll : fatal error LNK1120: 4 个无法解析的外部命令

@@ -1,2 +1,2 @@
 ﻿  numberTest.cpp
-  numberTest.vcxproj -> D:\学习\dev-c++\编译\软件工程\Myapp\algorithm\Debug\numberTest.dll
+LINK : fatal error LNK1104: 无法打开文件“..\Myapp\Debug\Myapp.obj”

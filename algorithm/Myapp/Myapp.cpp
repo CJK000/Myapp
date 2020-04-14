@@ -3,8 +3,10 @@
 #include"number.h"
 #include"expression.h"
 #include"make.h"
+#include"avl.h"
 #include<cstdio>
 #include<cstdlib>
+#include<string>
 #include<time.h>
 #include<fstream>
 #include <iostream>
@@ -16,6 +18,53 @@ void analyse();
 
 int main()
 {
+/*
+	AVL *root = NULL;
+	string s("123+123*213");
+	cout << insertAVL(root, s) << endl;
+	s = "123+123*213";
+	cout << insertAVL(root, s) << endl;
+	s = "123+12313";
+	cout << insertAVL(root, s) << endl;
+	s = "123+12*213";
+	cout << insertAVL(root, s) << endl;
+	s = "123+123*13";
+	cout << insertAVL(root, s) << endl;
+	s = "123+123*23";
+	cout << insertAVL(root, s) << endl;
+	s = "123+123*213";
+	cout << insertAVL(root, s) << endl;
+*/
+
+
+
+	Make m(10, 1);
+	Expression e;
+	int cnt = 0;
+	while (1) {
+		e = m.MakeProblem();
+		if (e.question.size() > 0) {
+			if (Expression(e.ToString()).Calculate() == e.answer) {
+				cnt++;
+				if (cnt % 1000 == 0) {
+					cout << cnt << " " << "true\n";
+					//					return 0;
+				}
+			}
+			else {
+				string s = e.ToString();
+				cout << s << endl;
+				cout << Expression(s).answer.ToString() << endl;
+				cout << e.answer.ToString() << endl;
+				cout << "false\n\n";
+			}
+		}
+	}
+
+
+
+
+
 /*
 	clock_t start, finish, cost;
 	for (long long r = 10000; r <= INT_MAX; ) {
@@ -101,29 +150,6 @@ int main()
 
 
 
-
-	Make m(8,1);
-	Expression e;
-	int cnt = 0;
-	while(1) {
-		e = m.MakeProblem();
-		if (e.question.size() > 0) {
-			if (Expression(e.ToString()).Calculate() == e.answer) {
-				cnt++;
-				if (cnt % 1000 == 0) {
-					cout << cnt << " " << "true\n";
-//					return 0;
-				}
-			}
-			else {
-				string s = e.ToString();
-				cout << s << endl;
-				cout << Expression(s).answer.ToString() << endl;
-				cout << e.answer.ToString() << endl;
-				cout << "false\n\n";
-			}
-		}
-	}
 
 
 
