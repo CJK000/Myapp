@@ -6,6 +6,7 @@
 #include<vector>
 #include<string>
 #include<set>
+#include<unordered_set>
 #include<random>
 #include<time.h>
 using namespace std;
@@ -14,6 +15,7 @@ class Make {
 private:
 	int max_number;	//最大数字
 	int problem_number;	//要求生成题目的数量
+	unordered_set<long long> Set;
 	Trie trie;
 	AVL *AVLroot;
 	typedef vector<Expression> (Make::*Function_ptr)(int, int, int, int);

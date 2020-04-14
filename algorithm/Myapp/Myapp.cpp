@@ -38,7 +38,7 @@ int main()
 
 
 
-	Make m(10, 1);
+	Make m(1000, 1);
 	Expression e;
 	int cnt = 0;
 	while (1) {

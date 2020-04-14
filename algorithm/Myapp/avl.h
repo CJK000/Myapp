@@ -23,6 +23,7 @@ inline void lrotate(AVL *&p);
 inline void rrotate(AVL *&p);
 bool insert(AVL *&p, long long hash);
 
+long long Hash(string s);
 
 
 bool insertAVL(AVL *&root, string s);

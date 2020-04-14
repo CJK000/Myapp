@@ -106,10 +106,12 @@ vector<Expression> Make::RandPlus(int max_n, int max_de, int symbol_n, int outpu
 	}
 	if (output == 1) {
 //		if (v.size() > 0 && this->trie.Insert(v[0].ToString()) == true) {
-		if (v.size() > 0 && insertAVL(this->AVLroot, v[0].ToString()+v[0].answer.ToString()) == true) {
+		if (v.size() > 0 && insertAVL(this->AVLroot, v[0].ToString() + v[0].answer.ToString()) == true) {
+//		if (v.size() > 0 && this->Set.find(Hash(v[0].ToString() + v[0].answer.ToString())) == this->Set.end()) {
 			for (Expression e : v) {
 //				this->trie.Insert(e.ToString()); 
 				insertAVL(this->AVLroot, e.ToString()+e.answer.ToString());
+//				this->Set.insert(Hash(v[0].ToString() + v[0].answer.ToString()));
 			}
 		}
 		else {
@@ -158,9 +160,11 @@ vector<Expression> Make::RandMinus(int max_n, int max_de, int symbol_n, int outp
 	if (output == 1) {
 //		if (v.size() > 0 && this->trie.Insert(v[0].ToString()) == true) {
 		if (v.size() > 0 && insertAVL(this->AVLroot, v[0].ToString() + v[0].answer.ToString()) == true) {
+//		if (v.size() > 0 && this->Set.find(Hash(v[0].ToString() + v[0].answer.ToString())) == this->Set.end()) {
 			for (Expression e : v) {
 //				this->trie.Insert(e.ToString()); 
-				insertAVL(this->AVLroot, e.ToString() + e.answer.ToString());
+				insertAVL(this->AVLroot, e.ToString()+e.answer.ToString());
+//				this->Set.insert(Hash(v[0].ToString() + v[0].answer.ToString()));
 			}
 		}
 		else {
@@ -220,13 +224,14 @@ vector<Expression> Make::RandMul(int max_n, int max_de, int symbol_n, int output
 				}
 			}
 		}
-	}
-	if (output == 1) {
+	}	if (output == 1) {
 //		if (v.size() > 0 && this->trie.Insert(v[0].ToString()) == true) {
 		if (v.size() > 0 && insertAVL(this->AVLroot, v[0].ToString() + v[0].answer.ToString()) == true) {
+//		if (v.size() > 0 && this->Set.find(Hash(v[0].ToString() + v[0].answer.ToString())) == this->Set.end()) {
 			for (Expression e : v) {
 //				this->trie.Insert(e.ToString()); 
-				insertAVL(this->AVLroot, e.ToString() + e.answer.ToString());
+				insertAVL(this->AVLroot, e.ToString()+e.answer.ToString());
+//				this->Set.insert(Hash(v[0].ToString() + v[0].answer.ToString()));
 			}
 		}
 		else {
@@ -275,13 +280,14 @@ vector<Expression> Make::RandDiv(int max_n, int max_de, int symbol_n, int output
 				}
 			}
 		}
-	}
-	if (output == 1) {
+	}	if (output == 1) {
 //		if (v.size() > 0 && this->trie.Insert(v[0].ToString()) == true) {
 		if (v.size() > 0 && insertAVL(this->AVLroot, v[0].ToString() + v[0].answer.ToString()) == true) {
+//		if (v.size() > 0 && this->Set.find(Hash(v[0].ToString() + v[0].answer.ToString())) == this->Set.end()) {
 			for (Expression e : v) {
 //				this->trie.Insert(e.ToString()); 
-				insertAVL(this->AVLroot, e.ToString() + e.answer.ToString());
+				insertAVL(this->AVLroot, e.ToString()+e.answer.ToString());
+//				this->Set.insert(Hash(v[0].ToString() + v[0].answer.ToString()));
 			}
 		}
 		else {

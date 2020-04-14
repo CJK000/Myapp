@@ -63,8 +63,8 @@ bool insert(AVL *&p, long long hash) {
 	return insert(p->rchild, hash);
 }
 
-long long mod = 99999999999973;
-long long Hash(string &s) {
+const long long mod = 99999999999973;
+long long Hash(string s) {
 	long long ret=0;
 	int i;
 	int len = s.length();
