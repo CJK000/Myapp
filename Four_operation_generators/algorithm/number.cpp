@@ -129,12 +129,17 @@ Number::Number(string str) {
 string Number::ToString() {	//½«´¢×Ö×ª»»³É×Ö·û´®
 	char s[20];
 	string str;
-	if(this->integer!=0) str += itoa(this->integer, s, 10);
+	if (this->integer != 0) {
+		_itoa_s(this->integer, s, 10);
+		str += s;
+	}
 	if (this->denominator != 0) {
 		if (this->integer != 0) str += '\'';
-		str += itoa(this->numerator, s, 10);
+		_itoa_s(this->numerator, s, 12, 10);
+		str += s;
 		str += '/';
-		str += itoa(this->denominator, s, 10);
+		_itoa_s(this->denominator, s, 12, 10);
+		str += s;
 	}
 	else if (this->integer == 0)str += '0';
 	return str;

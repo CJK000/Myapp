@@ -11,31 +11,30 @@
 using namespace std;
 
 Make::Make(int n, int m) {
-    this->max_number = n;
+    this->max_number = n-1;
     this->problem_number = m;
-    stringSet.clear();
+    this->AVLroot = NULL;
+//	stringSet.clear();
     srand(time(0));
 }
 
 bool Make::CheckNumber() {
-    if (this->max_number <= 0)return false;
+    if (this->max_number < 0)return false;
     else if (this->problem_number <= 0)return false;
-    else if (this->max_number == 1) {
-        if (this->problem_number > 40)return false;
-    }
-    else if (this->max_number == 2) {
-        if (this->problem_number > 500)return false;
-    }
-    else if (this->max_number == 3) {
-        if (this->problem_number > 5000)return false;
-    }
-    else if (this->problem_number > 10000)return false;
-    else return true;
+    else if (this->max_number == 0) if (this->problem_number > 1)return false;
+    else if (this->max_number == 1) if (this->problem_number > 40)return false;
+    else if (this->max_number == 2) if (this->problem_number > 500)return false;
+    else if (this->max_number == 3) if (this->problem_number > 10000)return false;
+    else if (this->max_number == 4) if (this->problem_number > 50000)return false;
+    else if (this->max_number < 10) if(this->problem_number > 1000000)return false;
+    else if (this->max_number < 100) if (this->problem_number > 10000000)return false;
+    else if (this->problem_number > 30000000)return false;
+    return true;
 }
 
 
 Expression Make::MakeProblem(void) {
-    if (this->CheckNumber() == false)return Expression();
+//	if (this->CheckNumber() == false)return Expression();
     vector<Expression> v;	//接收生成题目的返回值
     while (v.size() == 0) {
         v = (this->*this->randMake[rand() % 4])(this->max_number, this->max_number, rand() % 3 + 1, 1);
@@ -59,7 +58,7 @@ Expression Make::MakeProblem(void) {
 
 
 
-
+/*
 bool Make::CheckExist(Expression exp) {
     return this->stringSet.find(exp.ToString()) != this->stringSet.end() ;
 }
@@ -67,6 +66,7 @@ bool Make::CheckExist(Expression exp) {
 void Make::Insert(Expression exp) {
     this->stringSet.insert(exp.ToString());
 }
+*/
 
 
 
@@ -109,9 +109,11 @@ vector<Expression> Make::RandPlus(int max_n, int max_de, int symbol_n, int outpu
         }
     }
     if (output == 1) {
-        if (v.size() > 0 && this->CheckExist(v[0]) == false) {
+//		if (v.size() > 0 && this->trie.Insert(v[0].ToString()) == true) {
+        if (v.size() > 0 && insertAVL(this->AVLroot, v[0].ToString()+v[0].answer.ToString()) == true) {
             for (Expression e : v) {
-                this->Insert(e);
+//				this->trie.Insert(e.ToString());
+                insertAVL(this->AVLroot, e.ToString()+e.answer.ToString());
             }
         }
         else {
@@ -158,9 +160,11 @@ vector<Expression> Make::RandMinus(int max_n, int max_de, int symbol_n, int outp
         }
     }
     if (output == 1) {
-        if (v.size() > 0 && this->CheckExist(v[0]) == false) {
+//		if (v.size() > 0 && this->trie.Insert(v[0].ToString()) == true) {
+        if (v.size() > 0 && insertAVL(this->AVLroot, v[0].ToString() + v[0].answer.ToString()) == true) {
             for (Expression e : v) {
-                this->Insert(e);
+//				this->trie.Insert(e.ToString());
+                insertAVL(this->AVLroot, e.ToString() + e.answer.ToString());
             }
         }
         else {
@@ -222,9 +226,11 @@ vector<Expression> Make::RandMul(int max_n, int max_de, int symbol_n, int output
         }
     }
     if (output == 1) {
-        if (v.size() > 0 && this->CheckExist(v[0]) == false) {
+//		if (v.size() > 0 && this->trie.Insert(v[0].ToString()) == true) {
+        if (v.size() > 0 && insertAVL(this->AVLroot, v[0].ToString() + v[0].answer.ToString()) == true) {
             for (Expression e : v) {
-                this->Insert(e);
+//				this->trie.Insert(e.ToString());
+                insertAVL(this->AVLroot, e.ToString() + e.answer.ToString());
             }
         }
         else {
@@ -275,9 +281,11 @@ vector<Expression> Make::RandDiv(int max_n, int max_de, int symbol_n, int output
         }
     }
     if (output == 1) {
-        if (v.size() > 0 && this->CheckExist(v[0]) == false) {
+//		if (v.size() > 0 && this->trie.Insert(v[0].ToString()) == true) {
+        if (v.size() > 0 && insertAVL(this->AVLroot, v[0].ToString() + v[0].answer.ToString()) == true) {
             for (Expression e : v) {
-                this->Insert(e);
+//				this->trie.Insert(e.ToString());
+                insertAVL(this->AVLroot, e.ToString() + e.answer.ToString());
             }
         }
         else {
@@ -317,6 +325,7 @@ bool check_answer(string problem,string answer){
 
 bool build_problem(int max_number,int problem_number){
     Make m(max_number,problem_number);	//初始化一个 Make 类，参数为最大数字
+    if(m.CheckNumber()==false)return false;
         Expression problem;	//用于接收返回的题目
         int cnt = 0;	//计数器，计算已生成题目的数量
         string filename1 = "./Exercises.txt";
